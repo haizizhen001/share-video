@@ -1,0 +1,30 @@
+version: '3'
+services:
+  mongo:
+    container_name: mongoDb5
+    image: mongo:5.0.26
+    stdin_open: true
+    tty: true
+    restart: always
+    volumes: 
+      - ./:/code
+    ports:
+      - "27055:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_DATABASE: funnyVideos
+
+  backend:
+    build: .
+    restart: always
+    container_name: funnyVideosBackend
+    ports:
+      - 3000:3000
+    environment:
+      # app
+      - NODE_ENV=development
+      - APP_NAME=funnyVideos-backend-service
+      - PORT=3000
+    depends_on:
+      - mongo
