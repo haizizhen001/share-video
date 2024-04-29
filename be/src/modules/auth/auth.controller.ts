@@ -8,7 +8,11 @@ import {
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { UserRegisterPayloadDto } from './dto/authPayloadDto';
+import {
+  UserLoginPayloadDto,
+  UserRegisterPayloadDto,
+  UserResponseDto,
+} from './dto/authPayloadDto';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -18,7 +22,7 @@ export class AuthController {
   @Post('register')
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({
-    type: UserRegisterPayloadDto,
+    type: UserResponseDto,
     description: 'Register email or phone ',
   })
   async userRegister(@Body() userRegisterDto: UserRegisterPayloadDto) {
@@ -28,8 +32,27 @@ export class AuthController {
       throw new BadRequestException('User already exists');
     }
     return {
+      code: 0,
       message: 'User created successfully',
       data: value,
     };
+  }
+  @Post('login')
+  @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({
+    description: 'Register email or phone ',
+    type: UserResponseDto,
+  })
+  async userLogin(@Body() userLoginDto: UserLoginPayloadDto) {
+    try {
+      const value = await this.authService.loginUser(userLoginDto);
+      return {
+        code: 0,
+        message: 'User login successfully',
+        data: { accessToken: value },
+      };
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
 }

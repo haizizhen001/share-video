@@ -5,12 +5,15 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
+      trim: true,
     },
     name: {
       type: String,
     },
-    username: {
+    userName: {
       type: String,
+      unique: true,
+      trim: true,
     },
     password: {
       type: String,
@@ -35,7 +38,7 @@ export interface IUser extends Document {
   _id: string;
   email: string;
   name: string;
-  username: string;
+  userName: string;
   password: string;
 }
 export { userProvider, userSchema };

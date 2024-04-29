@@ -11,6 +11,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     readonly configService: ConfigService,
     private authService: AuthService,
+    
   ) {
     console.log(configService.get('JWT_SECRET_KEY'));
     super({
