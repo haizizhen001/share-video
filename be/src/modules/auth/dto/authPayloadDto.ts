@@ -21,19 +21,7 @@ export class UserRegisterPayloadDto {
   @IsString()
   name: string;
 }
-export class UserResponseDto {
-  @ApiProperty()
-  @IsString()
-  message: string;
 
-  @ApiProperty()
-  @IsString()
-  code: string;
-
-  @ApiProperty()
-  @IsObject()
-  data: any;
-}
 export class UserLoginPayloadDto {
   @ApiProperty()
   @IsString()

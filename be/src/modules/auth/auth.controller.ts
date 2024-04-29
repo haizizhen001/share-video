@@ -11,8 +11,8 @@ import { AuthService } from './auth.service';
 import {
   UserLoginPayloadDto,
   UserRegisterPayloadDto,
-  UserResponseDto,
 } from './dto/authPayloadDto';
+import { ResponseDto } from 'src/shared/dto/apiPayloadDto';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -22,7 +22,7 @@ export class AuthController {
   @Post('register')
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({
-    type: UserResponseDto,
+    type: ResponseDto,
     description: 'Register email or phone ',
   })
   async userRegister(@Body() userRegisterDto: UserRegisterPayloadDto) {
@@ -40,8 +40,8 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({
-    description: 'Register email or phone ',
-    type: UserResponseDto,
+    description: 'login user',
+    type: ResponseDto,
   })
   async userLogin(@Body() userLoginDto: UserLoginPayloadDto) {
     try {

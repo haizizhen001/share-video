@@ -1,23 +1,21 @@
 import type { Connection, Document } from 'mongoose';
 import { Schema } from 'mongoose';
 
-const userSchema = new Schema(
+const videoSchema = new Schema(
   {
-    email: {
-      type: String,
-      trim: true,
-    },
-    name: {
+    title: {
       type: String,
     },
-    userName: {
+    content: {
       type: String,
-      unique: true,
-      trim: true,
+    },
+    link: {
+      type: String,
       required: true,
     },
-    password: {
-      type: String,
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
   },
@@ -29,20 +27,20 @@ const userSchema = new Schema(
   },
 );
 
-const userProvider = [
+const videoProvider = [
   {
-    provide: 'USER_MODEL',
+    provide: 'VIDEO_MODEL',
     useFactory: (connection: Connection) =>
-      connection.model('User', userSchema),
+      connection.model('Video', videoSchema),
     inject: ['MAIN_MONGO_CONNECTION'],
   },
 ];
 
-export interface IUser extends Document {
+export interface IVideo extends Document {
   _id: string;
-  email: string;
-  name: string;
-  userName: string;
-  password: string;
+  title: string;
+  content: string;
+  link: string;
+  userId: string;
 }
-export { userProvider, userSchema };
+export { videoProvider, videoSchema };
