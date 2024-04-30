@@ -6,6 +6,7 @@ export interface IUserAuth {
 }
 
 export function AuthUser() {
+  console.log('AuthUser');
   return createParamDecorator((_data: unknown, context: ExecutionContext) => {
     const request = context.switchToHttp().getRequest();
 

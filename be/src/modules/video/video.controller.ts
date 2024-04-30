@@ -14,8 +14,8 @@ import { ResponseDto } from 'src/shared/dto/apiPayloadDto';
 import { ShareVideoPayloadDto } from './dto/videoPayloadDto';
 import { AuthUser, IUserAuth } from 'src/shared/decorator/authUser.decorator';
 
-@Controller('videos')
-@ApiTags('videos')
+@Controller('video')
+@ApiTags('video')
 export class VideoController {
   constructor(private videoService: VideoService) {}
 

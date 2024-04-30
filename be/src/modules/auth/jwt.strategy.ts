@@ -10,24 +10,22 @@ import { IUser } from 'src/mongodb/models/user.model';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     readonly configService: ConfigService,
-    private authService: AuthService,
-    
+    private readonly authService: AuthService,
   ) {
-    console.log(configService.get('JWT_SECRET_KEY'));
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: configService.get('JWT_SECRET_KEY'),
     });
   }
 
-  async validate(payload: JwtDto): Promise<IUser> {
+  async validate(payload: JwtDto): Promise<JwtDto> {
     const user = await this.authService.validateUser(
       payload.userName,
-      payload.id,
+      payload.userId,
     );
     if (!user) {
       throw new UnauthorizedException();
     }
-    return user;
+    return payload;
   }
 }

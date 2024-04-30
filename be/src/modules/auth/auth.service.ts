@@ -17,8 +17,8 @@ export class AuthService {
     private readonly configService: ConfigService,
   ) {}
 
-  async validateUser(userName: string, id: string): Promise<IUser> {
-    return await this.userModel.findOne({ userName, _id: id });
+  async validateUser(userName: string, userId: string): Promise<IUser> {
+    return await this.userModel.findOne({ userName, _id: userId });
   }
 
   async registerUser({

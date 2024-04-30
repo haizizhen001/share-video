@@ -16,7 +16,7 @@ import { userProvider } from 'src/mongodb/models/user.model';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
         return {
-          secret: configService.get<string>('JWT_ACCESS_SECRET'),
+          secret: configService.get<string>('JWT_SECRET_KEY'),
           signOptions: {
             expiresIn: configService.get<string>('JWT_ACCESS_TOKEN_EXPIRES'),
           },
@@ -27,6 +27,6 @@ import { userProvider } from 'src/mongodb/models/user.model';
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, ...userProvider],
-  exports: [AuthService],
+  exports: [JwtModule],
 })
 export class AuthModule {}
