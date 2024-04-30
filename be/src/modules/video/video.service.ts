@@ -24,7 +24,7 @@ export class VideoService {
         type: 'shared',
         data: video,
       };
-      this.videoGateway.server.emit(JSON.stringify(message));
+      this.videoGateway.server.emit('message', JSON.stringify(message));
       return resultVideo;
     }
   }

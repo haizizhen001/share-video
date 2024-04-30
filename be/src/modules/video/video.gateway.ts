@@ -9,20 +9,19 @@ import {
 import { Logger } from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
 
-@WebSocketGateway()
+@WebSocketGateway({ namespace: '/video/notification' })
 export class VideoGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
   @WebSocketServer() server: Server;
-  private logger: Logger = new Logger('VideosGateway');
+  private logger: Logger = new Logger('VideoNotificationGateway');
 
   @SubscribeMessage('msgToServer')
   handleMessage(payload: string): void {
     this.server.emit('msgToClient', payload);
   }
-
   afterInit() {
-    this.logger.log('Init');
+    this.logger.log('WebSocket Initialized!');
   }
 
   handleConnection(client: Socket, ...args: any[]) {
