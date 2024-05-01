@@ -6,7 +6,7 @@ import {
   UserRegisterPayloadDto,
 } from './dto/authPayloadDto';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()

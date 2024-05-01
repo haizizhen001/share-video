@@ -8,12 +8,14 @@ services:
     restart: always
     volumes: 
       - ./:/code
+    hostIp:
     ports:
-      - "27055:27017"
+      - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
       MONGO_INITDB_DATABASE: funnyVideos
+      
 
   backend:
     build: .
@@ -26,5 +28,7 @@ services:
       - NODE_ENV=development
       - APP_NAME=funnyVideos-backend-service
       - PORT=3000
+    env_file:
+      - .env
     depends_on:
       - mongo
