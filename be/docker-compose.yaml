@@ -8,7 +8,6 @@ services:
     restart: always
     volumes: 
       - ./:/code
-    hostIp:
     ports:
       - "27017:27017"
     environment:
@@ -22,12 +21,12 @@ services:
     restart: always
     container_name: funnyVideosBackend
     ports:
-      - 3000:3000
+      - 3001:3001
     environment:
       # app
       - NODE_ENV=development
       - APP_NAME=funnyVideos-backend-service
-      - PORT=3000
+      - PORT=3001
     env_file:
       - .env
     depends_on:
