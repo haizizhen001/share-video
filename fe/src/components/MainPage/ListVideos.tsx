@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Card, List, Skeleton, Col, Row, notification, Typography } from 'antd';
 
-import VideoService from '../../services/video.services';
 import { Video } from '../../common/app-interface';
+import { useVideo } from '../../functions/useVideo';
 
 const ListVideos = () => {
   const [loadingPage, setLoadingPage] = useState(true);
   const [list, setList] = useState<Video[]>([]);
   const [api] = notification.useNotification();
+  const {getVideos} = useVideo();
 
   useEffect(() => {
-    VideoService.getVideos()
+    getVideos()
       .then((res: any) => {
         setLoadingPage(false);
         setList(res.data);
       })
-      .catch((err) => {
+      .catch((err: any) => { 
         console.log(err);
         api.error({
           message: 'Error',
