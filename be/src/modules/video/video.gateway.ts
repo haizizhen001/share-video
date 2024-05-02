@@ -9,7 +9,13 @@ import {
 import { Logger } from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
 
-@WebSocketGateway({ namespace: '/video/notification' })
+@WebSocketGateway({
+  namespace: '/video/notification',
+  cors: {
+    origin: '*',
+} 
+})
+
 export class VideoGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {

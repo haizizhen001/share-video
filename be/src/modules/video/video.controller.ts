@@ -31,7 +31,7 @@ export class VideoController {
     @AuthUser() user: IUserAuth,
   ) {
     try {
-      this.videoService.create(shareVideoPayload, user.userId);
+      this.videoService.create(shareVideoPayload, user.email, user.userId);
       return {
         code: 0,
         message: 'Video shared successfully',

@@ -18,6 +18,10 @@ const videoSchema = new Schema(
       ref: 'User',
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: {
@@ -42,5 +46,6 @@ export interface IVideo extends Document {
   content: string;
   link: string;
   userId: string;
+  email: string;
 }
 export { videoProvider, videoSchema };

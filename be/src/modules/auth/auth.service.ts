@@ -17,8 +17,8 @@ export class AuthService {
     private readonly configService: ConfigService,
   ) {}
 
-  async validateUser(userName: string, userId: string): Promise<IUser> {
-    return await this.userModel.findOne({ userName, _id: userId });
+  async validateUser(userId: string): Promise<IUser> {
+    return await this.userModel.findOne({ _id: userId });
   }
 
   async registerUser({
@@ -50,6 +50,7 @@ export class AuthService {
       return this.generateAccessToken({
         userId: user._id,
         userName: user.userName,
+        email: user.email
       });
     }
     throw new Error('User not found');
@@ -57,6 +58,7 @@ export class AuthService {
   private generateAccessToken(payload: {
     userId: string;
     userName: string;
+    email: string;
   }): string {
     return this.jwtService.sign(payload, {
       secret: this.configService.get('JWT_SECRET_KEY'),
