@@ -36,7 +36,7 @@ const HeaderLayout = () => {
         });
       } else {
         notification.error({
-          message: 'Error',
+          message: 'Login error',
           description: 'Login error',
         });
       }
