@@ -13,9 +13,8 @@ import { Socket, Server } from 'socket.io';
   namespace: '/video/notification',
   cors: {
     origin: '*',
-} 
+  },
 })
-
 export class VideoGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {

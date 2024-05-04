@@ -25,7 +25,7 @@ export class VideoService {
       if (resultVideo) {
         const message = {
           type: 'shared',
-          data: video,
+          data: videoData,
         };
         this.videoGateway.server.emit('message', JSON.stringify(message));
         return resultVideo;
@@ -38,6 +38,7 @@ export class VideoService {
     try {
       const metadata = await urlMetadata(link);
       console.log(metadata);
+      if (!metadata['og:video:url']) throw new Error('Video not found');
       const video = {
         title: metadata.title,
         content: metadata.description,

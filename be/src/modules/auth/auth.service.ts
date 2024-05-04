@@ -32,6 +32,10 @@ export class AuthService {
       throw new Error('Passwords do not match');
     }
     const hashPassword = await this.hashPassword(password);
+    const userExist = await this.userModel.findOne({ userName });
+    if (userExist) {
+      throw new Error('User already exists');
+    }
     const user = new this.userModel({
       userName,
       password: hashPassword,

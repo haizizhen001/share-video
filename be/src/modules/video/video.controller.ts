@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -41,7 +42,7 @@ export class VideoController {
         message: 'Video shared successfully',
       };
     } catch (e) {
-      throw e;
+      throw new BadRequestException(e.message);
     }
   }
   @Get()
