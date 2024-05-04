@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class ShareVideoPayloadDto {
   @ApiProperty()
   @IsString()
-  title: string;
+  title?: string;
 
   @ApiProperty()
   @IsString()
@@ -11,9 +11,9 @@ export class ShareVideoPayloadDto {
 
   @ApiProperty()
   @IsString()
-  email: string;
+  email?: string;
 
   @ApiProperty()
   @IsString()
-  content: string;
+  content?: string;
 }
