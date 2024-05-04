@@ -1,12 +1,20 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Layout, Typography, Space, Form, Input } from 'antd';
+import {
+  Button,
+  Layout,
+  Typography,
+  Space,
+  Form,
+  Input,
+  notification,
+} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {
   ShareAltOutlined,
   LogoutOutlined,
   HomeOutlined,
 } from '@ant-design/icons';
-import { useContextUser } from '../Context/UserContext';
+import { useContextUser } from '../Common/UserContext'
 import { useAuth } from '../../functions/useAuth';
 
 const { Header } = Layout;
@@ -16,9 +24,29 @@ const HeaderLayout = () => {
   const navigate = useNavigate();
   const { login, logout } = useAuth();
   const { user, setUser } = useContextUser();
+  
   const onLogin = async (value: any) => {
-    const currentUser = await login(value.email, value.password);
-    if (currentUser) setUser(currentUser);
+    try {
+      const currentUser = await login(value.email, value.password);
+      if (currentUser) {
+        setUser(currentUser);
+        notification.success({
+          message: 'Success',
+          description: 'Login successfully',
+        });
+      } else {
+        notification.error({
+          message: 'Error',
+          description: 'Login error',
+        });
+      }
+    } catch (e) {
+      const error = e as Error;
+      notification.error({
+        message: 'Error',
+        description: error.message,
+      });
+    }
   };
   const onLogout = () => {
     logout();
@@ -107,7 +135,7 @@ const HeaderLayout = () => {
       )}
       {Object.keys(user || {}).length > 0 && (
         <Space size={'small'}>
-          <Text className='App-color-white'>
+          <Text className='white'>
             Welcome <b>{user?.userName}</b>
           </Text>
           <Button type='primary' icon={<ShareAltOutlined />} onClick={share}>

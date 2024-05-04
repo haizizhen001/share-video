@@ -16,7 +16,6 @@ interface UserProviderProps {
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const currentUser = useAuth().getCurrentInfoUser();
-    console.log("currentUser" + JSON.stringify(currentUser))
     const [user, setUser] = useState<IUserInfo | null>(currentUser);
     const value: UserContextType = { user, setUser };
 

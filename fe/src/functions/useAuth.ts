@@ -1,6 +1,5 @@
 import axios from "axios";
 import { IUserInfo, ResponseApi } from "../common/app-interface";
-import { notification } from "antd";
 const { REACT_APP_API_URL } = process.env;
 
 export const useAuth = () => {
@@ -18,13 +17,35 @@ export const useAuth = () => {
         setCurrentUser(response.data?.data?.accessToken);
         return getCurrentInfoUser();
       } else {
-        notification.error({ message: response.message });
+        throw new Error(response.data.message);
       }
     } catch (error : any) {
-      notification.error({ message: error.response.data.message });
+      throw new Error(error.response.data.message);
     }
-    return {} as IUserInfo;
   }
+  const register = async (userName: string, password: string, passwordVerify: string, name: string) => {
+    try {
+      const response = await axios.post(`${REACT_APP_API_URL}/auth/register`, {
+        userName,
+        password,
+        passwordVerify,
+        name,
+        email: userName,
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }) as ResponseApi;
+      if (response.data.code === 0) {
+        return response.data.data;
+      } else {
+        throw new Error(response.data.message);
+      }
+    } catch (error : any) {
+      throw new Error(error.response.data.message);
+    }
+  }
+
   const setCurrentUser = (accessToken: string) => {
     localStorage.setItem("accessToken", accessToken);
   }
@@ -41,5 +62,5 @@ export const useAuth = () => {
   const logout = () => {
     localStorage.removeItem("accessToken");
   }
-  return { login, getCurrentInfoUser, getAccessToken, logout }
+  return {register, login, getCurrentInfoUser, getAccessToken, logout }
 }

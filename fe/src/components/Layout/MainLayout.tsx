@@ -1,6 +1,6 @@
-import { Layout, theme } from 'antd';
+import { Layout } from 'antd';
 import HeaderLayout from './HeaderLayout';
-import { UserProvider } from '../Context/UserContext';
+import { UserProvider } from "../Common/UserContext";
 
 const { Content } = Layout;
 const BaseLayout = ({ children }: { children: React.ReactNode }) => {

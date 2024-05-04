@@ -1,18 +1,19 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './components/MainPage';
-// import PrivateRoute from "./common/private-route";
-// import RestrictedRoute from "./common/restricted-route";
+import Share from './components/Share';
+import PrivateContext from './components/Common/PrivateContext';
+import Register from './components/UserPage/Register';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/share" element={<Share />} />
-        </Route> */}
         <Route path='/' Component={MainPage} />
+        <Route path="/share" element={<PrivateContext />}>
+          <Route path="/share" element={<Share />} />
+        </Route>
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

@@ -16,3 +16,10 @@
 .login-form .ant-form-item {
   margin: 0 5px;
 }
+
+.white{
+  color: white!important;
+}
+.register-form .ant-form-item{
+  margin: 10px;
+}
