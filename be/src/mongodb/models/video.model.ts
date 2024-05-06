@@ -47,5 +47,7 @@ export interface IVideo extends Document {
   link: string;
   userId: string;
   email: string;
+  created_at: Date;
+  updated_at: Date;
 }
 export { videoProvider, videoSchema };

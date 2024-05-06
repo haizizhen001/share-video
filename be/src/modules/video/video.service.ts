@@ -50,6 +50,6 @@ export class VideoService {
     }
   }
   async findAll(): Promise<IVideo[]> {
-    return await this.videoModel.find().sort({ createdAt: -1 }).lean();
+    return await this.videoModel.find().sort({ created_at: -1 }).lean();
   }
 }
