@@ -75,14 +75,14 @@ const Register = () => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your Username!',
+                  message: 'Please input your email!',
                 },
               ]}
               hasFeedback
             >
               <Input
                 prefix={<UserOutlined className='site-form-item-icon' />}
-                placeholder='Enter you userName'
+                placeholder='Enter you email'
               />
             </Form.Item>
             <Form.Item
